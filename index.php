@@ -43,9 +43,12 @@ declare(strict_types=1);
                                echo "<div>Weather info for Portland, Oregon:</div>";
                                $result = "";
                                foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
+                                   $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
+                                   $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
+                                   
                                    $result .= "<br>";
                                    $result .= $consolidated_weather->applicable_date . " <br>";
-                                   $result .= $consolidated_weather->min_temp . " / " . $consolidated_weather->max_temp . " <br>";
+                                   $result .= $minTempFahrenheit . " &degF / " . $maxTempFahrenheit . " &degF<br>";
                                    $result .= $consolidated_weather->weather_state_name . " <br>";
                                }
                                $result .= "<br>";
