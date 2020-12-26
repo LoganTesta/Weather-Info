@@ -37,6 +37,21 @@ declare(strict_types=1);
                 <div class="content">
                     <div class="content-row">
                         <div class="col-sma-6">
+                            <?php
+                               $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
+                               $jsonArray = json_decode( $jsonData );
+                               echo "<div>Weather info for Portland, Oregon:</div>";
+                               $result = "";
+                               foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
+                                   $result .= "<br>";
+                                   $result .= $consolidated_weather->applicable_date . " <br>";
+                                   $result .= $consolidated_weather->min_temp . " / " . $consolidated_weather->max_temp . " <br>";
+                                   $result .= $consolidated_weather->weather_state_name . " <br>";
+                               }
+                               $result .= "<br>";
+                               echo $result;
+                            ?>
+                            <div>Data provided by <a href="https://www.metaweather.com/" target="_blank">MetaWeather</a>.</div>
                         </div>
                         <div class="col-sma-6">
                         </div>
