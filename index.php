@@ -48,11 +48,11 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
             <div class="inner-wrapper">
                 <div class="content">
                     <div class="content-row">
-                        <div class="col-sma-6">
+                        <div class="col-sma-12">
                             <?php
                                $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
                                $jsonArray = json_decode( $jsonData );
-                               echo "<div>Weather info for Portland, Oregon:</div>";
+                               echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
                                $result = "<div class='weather-info'>";
                                foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
                                    $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
@@ -94,8 +94,6 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                echo $result;
                             ?>
                             <div>Data provided by <a href="https://www.metaweather.com/" target="_blank">MetaWeather</a>.</div>
-                        </div>
-                        <div class="col-sma-6">
                         </div>
                     </div>
                 </div>
