@@ -1,8 +1,15 @@
 <?php
 declare(strict_types=1);
 
+$snowIcon = "https://www.metaweather.com/static/img/weather/png/sn.png";
+$sleetIcon = "https://www.metaweather.com/static/img/weather/png/sl.png";
+$hailIcon = "https://www.metaweather.com/static/img/weather/png/sn.png";
+$thunderstormIcon = "https://www.metaweather.com/static/img/weather/png/t.png";
+$heavyRainIcon = "https://www.metaweather.com/static/img/weather/png/hr.png";
 $lightRainIcon = "https://www.metaweather.com/static/img/weather/png/lr.png";
 $showersIcon = "https://www.metaweather.com/static/img/weather/png/s.png";
+$heavyCloudIcon = "https://www.metaweather.com/static/img/weather/png/hc.png";
+$lightCloudIcon = "https://www.metaweather.com/static/img/weather/png/lc.png";
 $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
 
 ?>
@@ -53,11 +60,25 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    $weatherState = $consolidated_weather->weather_state_name;
                                    $weatherIcon;
                                    
-                                   if( $weatherState === "Light Rain" ) {
+                                   if ( $weatherState === "Snow" ) {
+                                       $weatherIcon = $snowIcon;
+                                   } else if ( $weatherState === "Sleet" ) {
+                                       $weatherIcon = $sleetIcon;
+                                   } else if ( $weatherState === "Hail" ) {
+                                       $weatherIcon = $hailIcon;
+                                   } else if ( $weatherState === "Thunderstorm" ) {
+                                       $weatherIcon = $thunderstormIcon;
+                                   } else if ( $weatherState === "Heavy Rain" ) {
+                                       $weatherIcon = $heavyRainIcon;
+                                   } else if ( $weatherState === "Light Rain" ) {
                                        $weatherIcon = $lightRainIcon;
-                                   } else if( $weatherState === "Showers" ) {
+                                   } else if ( $weatherState === "Showers" ) {
                                        $weatherIcon = $showersIcon;   
-                                   } else if( $weatherState === "Clear" ) {
+                                   } else if ( $weatherState === "Heavy Cloud" ) {
+                                       $weatherIcon = $heavyCloudIcon;
+                                   } else if ( $weatherState === "Light Cloud" ) {
+                                       $weatherIcon = $lightCloudIcon;
+                                   } else if ( $weatherState === "Clear" ) {
                                        $weatherIcon = $clearIcon;   
                                    } else { 
                                        $weatherIcon = "";
