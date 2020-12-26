@@ -1,5 +1,10 @@
 <?php
 declare(strict_types=1);
+
+$lightRainIcon = "https://www.metaweather.com/static/img/weather/png/lr.png";
+$showersIcon = "https://www.metaweather.com/static/img/weather/png/s.png";
+$clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
+
 ?>
 
 
@@ -15,7 +20,7 @@ declare(strict_types=1);
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <![endif]-->
         <link rel="icon" type="image/png" href="" />
-        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=12232020" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=12262020" />
         <link rel="stylesheet" type="text/css" href="assets/css/print-styles.css?mod=12232020" media="print" />
     </head>
     <body class="page-index">
@@ -41,17 +46,30 @@ declare(strict_types=1);
                                $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
                                $jsonArray = json_decode( $jsonData );
                                echo "<div>Weather info for Portland, Oregon:</div>";
-                               $result = "";
+                               $result = "<div class='weather-info'>";
                                foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
                                    $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
                                    $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
+                                   $weatherState = $consolidated_weather->weather_state_name;
+                                   $weatherIcon;
                                    
-                                   $result .= "<br>";
+                                   if( $weatherState === "Light Rain" ) {
+                                       $weatherIcon = $lightRainIcon;
+                                   } else if( $weatherState === "Showers" ) {
+                                       $weatherIcon = $showersIcon;   
+                                   } else if( $weatherState === "Clear" ) {
+                                       $weatherIcon = $clearIcon;   
+                                   } else { 
+                                       $weatherIcon = "";
+                                   }
+                                   
+                                   $result .= "<div class='weather-day'>";
                                    $result .= $consolidated_weather->applicable_date . " <br>";
                                    $result .= $minTempFahrenheit . " &degF / " . $maxTempFahrenheit . " &degF<br>";
-                                   $result .= $consolidated_weather->weather_state_name . " <br>";
+                                   $result .= $weatherState . " <img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' />";
+                                   $result .= "</div>";
                                }
-                               $result .= "<br>";
+                               $result .= "</div>";
                                echo $result;
                             ?>
                             <div>Data provided by <a href="https://www.metaweather.com/" target="_blank">MetaWeather</a>.</div>
