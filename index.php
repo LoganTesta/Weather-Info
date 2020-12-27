@@ -61,6 +61,8 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    $weatherIcon;
                                    $windSpeed = round( $consolidated_weather->wind_speed );
                                    $windDirection = $consolidated_weather->wind_direction_compass;
+                                   $airPressure = $consolidated_weather->air_pressure;
+                                   $humidity = $consolidated_weather->humidity;
                                    
                                    if ( $weatherState === "Snow" ) {
                                        $weatherIcon = $snowIcon;
@@ -88,8 +90,11 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    
                                    $result .= "<div class='weather-day'>";
                                    $result .= "<div>" . $consolidated_weather->applicable_date . "</div>";
-                                   $result .= "<div>" . $minTempFahrenheit . " &degF / " . $maxTempFahrenheit . " &degF</div>";
-                                   $result .= "<div>" . $windDirection . " " . $windSpeed . "mph </div>";
+                                   $result .= "<div>Low: " . $minTempFahrenheit . " &degF</div>";
+                                   $result .= "<div>High: " . $maxTempFahrenheit . " &degF</div>";
+                                   $result .= "<div>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
+                                   $result .= "<div>Air Pressure: " . $airPressure . " mbar</div>";
+                                   $result .= "<div>Humidity: " . $humidity . "%</div>";
                                    $result .= "<div>" . $weatherState . " <img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                    $result .= "</div>";
                                }
