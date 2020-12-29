@@ -175,8 +175,14 @@ a, a:link, a:visited { text-decoration: underline; }
 .weather-city { padding-bottom: 30px; }
 .weather-info div { font-size: 14px; }
 .weather-day { display: inline-block; width: 50%; padding-right: 30px;  padding-bottom: 60px; }
-.weather-day__date { font-weight: bold; }
+.weather-info .weather-day__date { padding-bottom: 5px; font-size: 15px; font-weight: bold; }
 .weather-day__image { display: block; }
+.weather-day__min-temp { }
+.weather-day__max-temp { }
+.weather-day__wind { }
+.weather-day__air-pressure { }
+.weather-day__humidity { padding-bottom: 10px; }
+.weather-day__conditions { }
 
 
 

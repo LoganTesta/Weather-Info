@@ -54,7 +54,11 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                $jsonArray = json_decode( $jsonData );
                                echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
                                $result = "<div class='weather-info'>";
+                               $i = 0;
                                foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
+                                   $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
+                                           date( 'M', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
+                                           date( 'd', strtotime( $consolidated_weather->applicable_date ) );
                                    $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
                                    $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
                                    $weatherState = $consolidated_weather->weather_state_name;
@@ -89,14 +93,19 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    }
                                    
                                    $result .= "<div class='weather-day'>";
-                                   $result .= "<div class='weather-day__date'>" . $consolidated_weather->applicable_date . "</div>";
-                                   $result .= "<div>Low: " . $minTempFahrenheit . " &degF</div>";
-                                   $result .= "<div>High: " . $maxTempFahrenheit . " &degF</div>";
-                                   $result .= "<div>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
-                                   $result .= "<div>Air Pressure: " . $airPressure . " mbar</div>";
-                                   $result .= "<div>Humidity: " . $humidity . "%</div>";
-                                   $result .= "<div>" . $weatherState . " <img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
+                                   if ( $i === 0 ){
+                                        $result .= "<div class='weather-day__date'>Today</div>";
+                                   } else { 
+                                        $result .= "<div class='weather-day__date'>" . $date . "</div>";
+                                   }
+                                   $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
+                                   $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
+                                   $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
+                                   $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
+                                   $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
+                                   $result .= "<div class='weather-day__conditions'>" . $weatherState . " <img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                    $result .= "</div>";
+                                   $i++;
                                }
                                $result .= "</div>";
                                echo $result;
