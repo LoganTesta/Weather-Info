@@ -97,13 +97,14 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                         $result .= "<div class='weather-day__date'>Today</div>";
                                    } else { 
                                         $result .= "<div class='weather-day__date'>" . $date . "</div>";
-                                   }
+                                   } 
                                    $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
                                    $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
+                                   $result .= "<div class='weather-day__conditions'>" . $weatherState . "</div>";
                                    $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
                                    $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
                                    $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
-                                   $result .= "<div class='weather-day__conditions'>" . $weatherState . " <img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
+                                   $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                    $result .= "</div>";
                                    $i++;
                                }
