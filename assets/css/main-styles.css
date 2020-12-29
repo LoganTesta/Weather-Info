@@ -182,7 +182,8 @@ a, a:link, a:visited { text-decoration: underline; }
 .weather-day__conditions { padding-bottom: 10px; }
 .weather-day__wind { }
 .weather-day__air-pressure { }
-.weather-day__humidity { padding-bottom: 12px; }
+.weather-day__humidity { }
+.weather-day__visibility { padding-bottom: 12px; }
 .weather-day__image-container { }
 .weather-day__image { display: block; }
 
@@ -212,6 +213,6 @@ a, a:link, a:visited { text-decoration: underline; }
     
     
     /*Weather section*/
-    .weather-day { width: 240px; }
+    .weather-day { width: 200px; }
     
 }

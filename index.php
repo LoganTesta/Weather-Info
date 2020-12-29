@@ -67,6 +67,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    $windDirection = $consolidated_weather->wind_direction_compass;
                                    $airPressure = $consolidated_weather->air_pressure;
                                    $humidity = $consolidated_weather->humidity;
+                                   $visibility = round( $consolidated_weather->visibility, 1 );
                                    
                                    if ( $weatherState === "Snow" ) {
                                        $weatherIcon = $snowIcon;
@@ -104,6 +105,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
                                    $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
                                    $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
+                                   $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
                                    $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                    $result .= "</div>";
                                    $i++;
