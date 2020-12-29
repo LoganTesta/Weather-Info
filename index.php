@@ -89,7 +89,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    }
                                    
                                    $result .= "<div class='weather-day'>";
-                                   $result .= "<div>" . $consolidated_weather->applicable_date . "</div>";
+                                   $result .= "<div class='weather-day__date'>" . $consolidated_weather->applicable_date . "</div>";
                                    $result .= "<div>Low: " . $minTempFahrenheit . " &degF</div>";
                                    $result .= "<div>High: " . $maxTempFahrenheit . " &degF</div>";
                                    $result .= "<div>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";

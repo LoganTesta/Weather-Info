@@ -163,20 +163,19 @@ input:focus, textarea:focus, select:focus { box-shadow: 0px 0px 3px 3px rgba(0, 
 
 a, a:link, a:visited { text-decoration: underline; }
 
-html, body, div, span, p, img, a, br, ul, li, ol, header, nav, footer, table, button, label, input, textarea, select, tr, td, th, h1, h2, h3, h4, h5, h6 {
-    font-size: 14px;
-}
-
 /*Header*/
-.header { padding-bottom: 30px; }
+.header { padding-bottom: 40px; }
 .main-title-container { padding-left: 30px; }
+.main-title-container__main-title { font-weight: bold; color: #333333; }
 .subtitle-container { padding-left: 30px; }
+.subtitle-container__sub-title { font-weight: bold; color: #333333; }
 
 
 /*Weather section*/
 .weather-city { padding-bottom: 30px; }
-.weather-info { }
+.weather-info div { font-size: 14px; }
 .weather-day { display: inline-block; width: 50%; padding-right: 30px;  padding-bottom: 60px; }
+.weather-day__date { font-weight: bold; }
 .weather-day__image { display: block; }
 
 
