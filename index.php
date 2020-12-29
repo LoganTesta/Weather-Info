@@ -54,7 +54,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                            $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
                            $jsonArray = json_decode( $jsonData );
                            echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
-                           $result = "<div class='weather-info'>";
+                           $result = "<div class='weather-info row'>";
                            $i = 0;
                            foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
                                $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
@@ -94,6 +94,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                    $weatherIcon = "";
                                }
 
+                               $result .= "<div class='col-6 col-sm-3 col-lg-2'>";
                                $result .= "<div class='weather-day'>";
                                if ( $i === 0 ){
                                     $result .= "<div class='weather-day__date'>Today</div>";
@@ -108,6 +109,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                                $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
                                $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
                                $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
+                               $result .= "</div>";
                                $result .= "</div>";
                                $i++;
                            }
