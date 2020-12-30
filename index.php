@@ -51,70 +51,70 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                 <div class="row">
                     <div class="col-sm-12">
                         <?php
-                           $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
-                           $jsonArray = json_decode( $jsonData );
-                           echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
-                           $result = "<div class='weather-info row'>";
-                           $i = 0;
-                           foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
-                               $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
-                                       date( 'M', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
-                                       date( 'd', strtotime( $consolidated_weather->applicable_date ) );
-                               $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
-                               $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
-                               $weatherState = $consolidated_weather->weather_state_name;
-                               $weatherIcon;
-                               $windSpeed = round( $consolidated_weather->wind_speed );
-                               $windDirection = $consolidated_weather->wind_direction_compass;
-                               $airPressure = $consolidated_weather->air_pressure;
-                               $humidity = $consolidated_weather->humidity;
-                               $visibility = round( $consolidated_weather->visibility, 1 );
+                        $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
+                        $jsonArray = json_decode( $jsonData );
+                        echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
+                        $result = "<div class='weather-info row'>";
+                        $i = 0;
+                        foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
+                            $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
+                                    date( 'M', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
+                                    date( 'd', strtotime( $consolidated_weather->applicable_date ) );
+                            $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
+                            $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
+                            $weatherState = $consolidated_weather->weather_state_name;
+                            $weatherIcon;
+                            $windSpeed = round( $consolidated_weather->wind_speed );
+                            $windDirection = $consolidated_weather->wind_direction_compass;
+                            $airPressure = $consolidated_weather->air_pressure;
+                            $humidity = $consolidated_weather->humidity;
+                            $visibility = round( $consolidated_weather->visibility, 1 );
 
-                               if ( $weatherState === "Snow" ) {
-                                   $weatherIcon = $snowIcon;
-                               } else if ( $weatherState === "Sleet" ) {
-                                   $weatherIcon = $sleetIcon;
-                               } else if ( $weatherState === "Hail" ) {
-                                   $weatherIcon = $hailIcon;
-                               } else if ( $weatherState === "Thunderstorm" ) {
-                                   $weatherIcon = $thunderstormIcon;
-                               } else if ( $weatherState === "Heavy Rain" ) {
-                                   $weatherIcon = $heavyRainIcon;
-                               } else if ( $weatherState === "Light Rain" ) {
-                                   $weatherIcon = $lightRainIcon;
-                               } else if ( $weatherState === "Showers" ) {
-                                   $weatherIcon = $showersIcon;   
-                               } else if ( $weatherState === "Heavy Cloud" ) {
-                                   $weatherIcon = $heavyCloudIcon;
-                               } else if ( $weatherState === "Light Cloud" ) {
-                                   $weatherIcon = $lightCloudIcon;
-                               } else if ( $weatherState === "Clear" ) {
-                                   $weatherIcon = $clearIcon;   
-                               } else { 
-                                   $weatherIcon = "";
-                               }
+                            if ( $weatherState === "Snow" ) {
+                                $weatherIcon = $snowIcon;
+                            } else if ( $weatherState === "Sleet" ) {
+                                $weatherIcon = $sleetIcon;
+                            } else if ( $weatherState === "Hail" ) {
+                                $weatherIcon = $hailIcon;
+                            } else if ( $weatherState === "Thunderstorm" ) {
+                               $weatherIcon = $thunderstormIcon;
+                            } else if ( $weatherState === "Heavy Rain" ) {
+                                $weatherIcon = $heavyRainIcon;
+                            } else if ( $weatherState === "Light Rain" ) {
+                                $weatherIcon = $lightRainIcon;
+                            } else if ( $weatherState === "Showers" ) {
+                                $weatherIcon = $showersIcon;   
+                            } else if ( $weatherState === "Heavy Cloud" ) {
+                                $weatherIcon = $heavyCloudIcon;
+                            } else if ( $weatherState === "Light Cloud" ) {
+                                $weatherIcon = $lightCloudIcon;
+                            } else if ( $weatherState === "Clear" ) {
+                                $weatherIcon = $clearIcon;   
+                            } else { 
+                                $weatherIcon = "";
+                            }
 
-                               $result .= "<div class='col-6 col-sm-3 col-lg-2'>";
-                               $result .= "<div class='weather-day'>";
-                               if ( $i === 0 ){
-                                    $result .= "<div class='weather-day__date'>Today</div>";
-                               } else { 
-                                    $result .= "<div class='weather-day__date'>" . $date . "</div>";
-                               } 
-                               $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
-                               $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
-                               $result .= "<div class='weather-day__conditions'>" . $weatherState . "</div>";
-                               $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
-                               $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
-                               $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
-                               $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
-                               $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
-                               $result .= "</div>";
-                               $result .= "</div>";
-                               $i++;
-                           }
-                           $result .= "</div>";
-                           echo $result;
+                            $result .= "<div class='col-6 col-sm-3 col-lg-2'>";
+                            $result .= "<div class='weather-day'>";
+                            if ( $i === 0 ){
+                                $result .= "<div class='weather-day__date'>Today</div>";
+                            } else { 
+                                $result .= "<div class='weather-day__date'>" . $date . "</div>";
+                            } 
+                            $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
+                            $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
+                            $result .= "<div class='weather-day__conditions'>" . $weatherState . "</div>";
+                            $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
+                            $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
+                            $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
+                            $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
+                            $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
+                            $result .= "</div>";
+                            $result .= "</div>";
+                            $i++;
+                        }
+                        $result .= "</div>";
+                        echo $result;
                         ?>
                         <div>Data provided by <a href="https://www.metaweather.com/" target="_blank">MetaWeather</a>.</div>
                     </div>
