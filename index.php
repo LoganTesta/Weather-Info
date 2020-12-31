@@ -37,7 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($PassedValidation === false) {
         $ValidationResponse .= "<p>Sorry, validation failed.  Please check all fields again.</p>";
     } else if ($PassedValidation) {
-        $ValidationResponse .= "You searched for " . $CityName . ".";
+        $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
+        $SearchResults = "";
+        
+        $ValidationResponse .= "<div class='location-search__query'>You searched for: " . $CityName . " at " . $SearchPath . "</div>";
+        $ValidationResponse .= "Search Results: ";
+        
+
+        $jsonData = file_get_contents( "" . $SearchPath );
+        $jsonArray = json_decode( $jsonData );
+        
+        $ValidationResponse .= "<div class='location-search__results'>";
+        for( $i = 0; $i < count( $jsonArray ); $i++ ){
+            $ValidationResponse .= "<div>" . $jsonArray[$i]->title . "</div>";
+        }   
+        $ValidationResponse .= "</div>";
     }
 } else {
     $CityName = "";

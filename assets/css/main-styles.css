@@ -1,12 +1,20 @@
 
 /***############### Beginning of Website-specific style sheet. ****/
 
+/*General Styles*/
+.form-transmission-results { padding-bottom: 30px; }
+
+
 /*Header*/
 .header { padding-bottom: 40px; }
 .main-title-container { padding-left: 30px; }
 .main-title-container__main-title { font-weight: bold; color: #333333; }
 .subtitle-container { padding-left: 30px; }
 .subtitle-container__sub-title { font-weight: bold; color: #333333; }
+
+
+/*Location Search Results*/
+.location-search__query { padding-bottom: 15px; }
 
 
 /*Weather section*/
