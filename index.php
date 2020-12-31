@@ -12,6 +12,37 @@ $heavyCloudIcon = "https://www.metaweather.com/static/img/weather/png/hc.png";
 $lightCloudIcon = "https://www.metaweather.com/static/img/weather/png/lc.png";
 $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
 
+
+$CityName = "";
+
+$ValidationResponse = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $CityName = htmlspecialchars(strip_tags(trim($_POST['cityName'])));
+
+    /* Validation time */
+    $PassedValidation = true;
+
+
+    $ValidSearchCity = true;
+    if (Trim($CityName) === "") {
+        $ValidSearchCity = false;
+    }
+    if ($ValidSearchCity === false) {
+        $PassedValidation = false;
+        $ValidationResponse .= "<p>Please enter a city name.</p>";
+    }
+
+
+    if ($PassedValidation === false) {
+        $ValidationResponse .= "<p>Sorry, validation failed.  Please check all fields again.</p>";
+    } else if ($PassedValidation) {
+        $ValidationResponse .= "You searched for " . $CityName . ".";
+    }
+} else {
+    $CityName = "";
+}
+
 ?>
 
 
@@ -50,6 +81,13 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
+                        <form id="citySearch" class="city-search" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <label for="cityName">City Name</label>
+                            <input type="input" id="cityName" name="cityName" />
+                            <button id="searchCityButton" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
+                            <div class="javascript-validation-results-contact-us"></div>
+                            <?php echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; ?>
+                        </form>
                         <?php
                         $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
                         $jsonArray = json_decode( $jsonData );
