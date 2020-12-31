@@ -53,7 +53,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                         <?php
                         $jsonData = file_get_contents( "https://www.metaweather.com/api/location/2475687/" );
                         $jsonArray = json_decode( $jsonData );
-                        echo "<div class='weather-city'>Weather info for Portland, Oregon:</div>";
+                        echo "<div class='weather-city'>Weather info for Portland, Oregon.</div>";
                         $result = "<div class='weather-info row'>";
                         $i = 0;
                         foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
@@ -103,7 +103,7 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
                             } 
                             $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
                             $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
-                            $result .= "<div class='weather-day__conditions'>" . $weatherState . "</div>";
+                            $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
                             $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
                             $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
                             $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
