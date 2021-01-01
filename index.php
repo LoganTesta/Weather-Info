@@ -37,15 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $ValidationResponse .= "<p>Please enter a city name.</p>";
     } else if ($PassedValidation) {
         $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
-        $SearchResults = "";
-        
-        $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
-        $ValidationResponse .= "<div class='location-search__intro'>Search Results: </div>";
-        
-
         $jsonData = file_get_contents( "" . $SearchPath );
         $jsonArray = json_decode( $jsonData );
         
+        
+        $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
+        $ValidationResponse .= "<div class='location-search__intro'>Search Results (" . count( $jsonArray ) . " total):</div>";
         $ValidationResponse .= "<div class='location-search__results'>";
         for( $i = 0; $i < count( $jsonArray ); $i++ ){           
             $latLongArray = explode( ",", $jsonArray[$i]->latt_long );
