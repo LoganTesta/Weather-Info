@@ -59,7 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             
             $ValidationResponse .= "<div class='location-search__results__city'>";
-            $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&latitude=" . $latitude . "&longitude=" . $longitude 
+            $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&stateOrCountry=" . $stateOrCountry 
+                    . "&latitude=" . $latitude . "&longitude=" . $longitude 
                     . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title  
                     . "<span class='location-search__results__state-or-country'>, " . $stateOrCountry . "</span></a>";
             
@@ -121,10 +122,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $locationURL = "";
                         $latitude = "";
                         $longitude = "";
+                        $locationStateCountry = "";
                         
                         
                         if( isset( $_GET['city'] ) ){
                             $city = $_GET['city'];
+                        }
+                        
+                        if( isset( $_GET['stateOrCountry'] ) ){
+                            $locationStateCountry = $_GET['stateOrCountry'];
                         }
                         
                         if( isset( $_GET['locationURL'] ) ){
@@ -153,8 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         if( $city !== "" && $locationURL !== "" && $latitude !== "" && $longitude !== "" ) {
                             $jsonData = file_get_contents( $locationURL );
                             $jsonArray = json_decode( $jsonData );
-                            echo "<div class='weather-city'>Weather info for <strong>" . $city . "</strong> at Latitude <strong>" 
-                                    . $latitude . "</strong>, Longitude <strong>" . $longitude . "</strong>.</div>";
+                            echo "<div class='weather-city'>Weather info for <strong>" . $city . ", " . $locationStateCountry . "</strong>"
+                                . " at Latitude <strong>" 
+                                . $latitude . "</strong>, Longitude <strong>" . $longitude . "</strong>.</div>";
                             $result = "<div class='weather-info row'>";
                             $i = 0;
                             foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
