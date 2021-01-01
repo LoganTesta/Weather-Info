@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
         $SearchResults = "";
         
-        $ValidationResponse .= "<div class='location-search__query'>You searched for: " . $CityName . " at " . $SearchPath . "</div>";
+        $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
         $ValidationResponse .= "Search Results: ";
         
 
@@ -49,9 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         $ValidationResponse .= "<div class='location-search__results'>";
         for( $i = 0; $i < count( $jsonArray ); $i++ ){
+            $latLongArray = explode( ",", $jsonArray[$i]->latt_long );
+            $latitude = $latLongArray[0];
+            $longitude = $latLongArray[1];
+
             $ValidationResponse .= "<div class='location-search__results__city'>";
-            $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title . "</a>";
-            
+            $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&latitude=" . $latitude . "&longitude=" . $longitude 
+                    . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title . "</a>";
             $ValidationResponse .= "</div>";
         }   
         $ValidationResponse .= "</div>";
@@ -108,7 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php
                         $city = "";
                         $locationURL = "";
-                      
+                        $latitude = "";
+                        $longitude = "";
+                        
                         
                         if( isset( $_GET['city'] ) ){
                             $city = $_GET['city'];
@@ -116,13 +122,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         
                         if( isset( $_GET['locationURL'] ) ){
                             $locationURL = $_GET['locationURL'];
+                        }   
+                        
+                        if( isset( $_GET['latitude'] ) ){
+                            $latitude = $_GET['latitude'];
+                        }
+                        
+                        if( isset( $_GET['longitude'] ) ){
+                            $longitude = $_GET['longitude'];
                         }
 
 
-                        if( $locationURL !== "" && $locationURL !== "" ) {
+                        if( $city !== "" && $locationURL !== "" && $latitude !== "" && $longitude !== "" ) {
                             $jsonData = file_get_contents( $locationURL );
                             $jsonArray = json_decode( $jsonData );
-                            echo "<div class='weather-city'>Weather info for <strong>" . $city . "</strong>.</div>";
+                            echo "<div class='weather-city'>Weather info for <strong>" . $city . "</strong> at Latitude <strong>" 
+                                    . $latitude . "</strong>, Longitude <strong>" . $longitude . "</strong>.</div>";
                             $result = "<div class='weather-info row'>";
                             $i = 0;
                             foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
