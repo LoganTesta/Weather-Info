@@ -30,12 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     if ($ValidSearchCity === false) {
         $PassedValidation = false;
-        $ValidationResponse .= "<p>Please enter a city name.</p>";
     }
 
 
     if ($PassedValidation === false) {
-        $ValidationResponse .= "<p>Sorry, validation failed.  Please check all fields again.</p>";
+        $ValidationResponse .= "<p>Please enter a city name.</p>";
     } else if ($PassedValidation) {
         $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
         $SearchResults = "";
