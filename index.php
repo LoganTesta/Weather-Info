@@ -109,8 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="col-sm-12">
                         <form id="citySearch" class="city-search" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <label class="city-search__city-name-label" for="cityName">City Name</label>
-                            <input type="input" id="cityName" name="cityName" />
-                            <button id="searchCityButton" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
+                            <input type="input" id="cityName" class="city-search__input" name="cityName" />
+                            <button id="searchCityButton" class="city-search__search-city-button" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
                             <div class="javascript-validation-results-contact-us"></div>
                             <?php echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; ?>
                         </form>

@@ -18,7 +18,9 @@ button:hover { background-color: #f0f0f0; transition: 0.4s; }
 
 
 /*Location Search Form*/
-.city-search__city-name-label { padding-right: 10px; font-size: 20px; font-weight: 600; }
+.city-search__city-name-label { padding-right: 10px; margin-bottom: 5px; font-size: 20px; font-weight: 600; }
+.city-search__input { margin-bottom: 10px; }
+.city-search__search-city-button { }
 
 
 /*Location Search Results*/
@@ -49,6 +51,12 @@ button:hover { background-color: #f0f0f0; transition: 0.4s; }
 
     /*Weather section*/
     .weather-day { }
+    
+    
+    /*Location Search Form*/
+    .city-search__city-name-label { margin-bottom: 0; }
+    .city-search__input { margin-bottom: 0; }
+    .city-search__search-city-button { }
     
 }
 
