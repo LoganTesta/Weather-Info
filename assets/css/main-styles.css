@@ -19,7 +19,10 @@ button:hover { background-color: #f0f0f0; transition: 0.4s; }
 
 /*Location Search Results*/
 .location-search__query { padding-bottom: 15px; }
-.location-search__results__city { font-weight: bold; }
+.location-search__intro { padding-bottom: 10px; }
+.location-search__results { }
+.location-search__results__city { padding-bottom: 8px; font-weight: bold; }
+.location-search__results__state-or-country { }
 
 
 /*Weather section*/

@@ -40,21 +40,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $SearchResults = "";
         
         $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
-        $ValidationResponse .= "Search Results: ";
+        $ValidationResponse .= "<div class='location-search__intro'>Search Results: </div>";
         
 
         $jsonData = file_get_contents( "" . $SearchPath );
         $jsonArray = json_decode( $jsonData );
         
         $ValidationResponse .= "<div class='location-search__results'>";
-        for( $i = 0; $i < count( $jsonArray ); $i++ ){
+        for( $i = 0; $i < count( $jsonArray ); $i++ ){           
             $latLongArray = explode( ",", $jsonArray[$i]->latt_long );
             $latitude = $latLongArray[0];
             $longitude = $latLongArray[1];
+           
+            $cityURL = "https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/";
+            $jsonDataCity = file_get_contents( $cityURL );
+            $jsonArrayCity = json_decode( $jsonDataCity );
+            $stateOrCountry = $jsonArrayCity->parent->title;             
 
+            
             $ValidationResponse .= "<div class='location-search__results__city'>";
             $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&latitude=" . $latitude . "&longitude=" . $longitude 
-                    . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title . "</a>";
+                    . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title  
+                    . "<span class='location-search__results__state-or-country'>, " . $stateOrCountry . "</span></a>";
+            
             $ValidationResponse .= "</div>";
         }   
         $ValidationResponse .= "</div>";
