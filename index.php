@@ -124,11 +124,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         }   
                         
                         if( isset( $_GET['latitude'] ) ){
-                            $latitude = $_GET['latitude'];
+                            $latitude = round( $_GET['latitude'], 2 );
+                            if( $latitude < 0 ) {
+                                $latitude .= " &deg;S";
+                            } else if ( $latitude > 0 ) { 
+                                $latitude .= " &deg;N";
+                            }
                         }
                         
                         if( isset( $_GET['longitude'] ) ){
-                            $longitude = $_GET['longitude'];
+                            $longitude = round( $_GET['longitude'], 2 );
+                            if( $longitude < 0 ) {
+                                $longitude .= " &deg;W";
+                            } else if ( $longitude > 0 ) { 
+                                $longitude .= " &deg;E";
+                            }
                         }
 
 
