@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <link rel="icon" type="image/png" href="" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
               integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=12262020" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=01012021" />
         <link rel="stylesheet" type="text/css" href="assets/css/print-styles.css?mod=12232020" media="print" />
     </head>
     <body class="page-index">
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="row">
                     <div class="col-sm-12">
                         <form id="citySearch" class="city-search" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                            <label for="cityName">City Name</label>
+                            <label class="city-search__city-name-label" for="cityName">City Name</label>
                             <input type="input" id="cityName" name="cityName" />
                             <button id="searchCityButton" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
                             <div class="javascript-validation-results-contact-us"></div>
@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 $weatherIcon;
                                 $windSpeed = round( $consolidated_weather->wind_speed );
                                 $windDirection = $consolidated_weather->wind_direction_compass;
-                                $airPressure = $consolidated_weather->air_pressure;
+                                $airPressure = round( $consolidated_weather->air_pressure * 0.0295301, 2 );
                                 $humidity = $consolidated_weather->humidity;
                                 $visibility = round( $consolidated_weather->visibility, 1 );
 
@@ -213,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
                                 $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
-                                $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " mbar</div>";
+                                $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " in.</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
                                 $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
                                 $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";

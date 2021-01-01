@@ -6,7 +6,7 @@ input, textarea, button { padding: 5px 12px; border: 2px solid #a0a0a0; border-r
 button { background-color: #e0e0e0; }
 button:hover { background-color: #f0f0f0; transition: 0.4s; }
 
-.form-transmission-results { padding-bottom: 30px; }
+.city-search .form-transmission-results { padding-top: 30px; padding-bottom: 60px; }
 
 
 /*Header*/
@@ -17,8 +17,12 @@ button:hover { background-color: #f0f0f0; transition: 0.4s; }
 .subtitle-container__sub-title { font-weight: bold; color: #333333; }
 
 
+/*Location Search Form*/
+.city-search__city-name-label { padding-right: 10px; font-size: 20px; font-weight: 600; }
+
+
 /*Location Search Results*/
-.location-search__query { padding-bottom: 15px; }
+.location-search__query { padding-bottom: 30px; }
 .location-search__intro { padding-bottom: 10px; }
 .location-search__results { }
 .location-search__results__city { padding-bottom: 8px; font-weight: bold; }
