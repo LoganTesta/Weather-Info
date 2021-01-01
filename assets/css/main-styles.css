@@ -15,6 +15,7 @@
 
 /*Location Search Results*/
 .location-search__query { padding-bottom: 15px; }
+.location-search__results__city { font-weight: bold; }
 
 
 /*Weather section*/
