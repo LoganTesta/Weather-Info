@@ -1,22 +1,37 @@
 
 /***############### Beginning of Website-specific style sheet. ****/
 
+/* Site Color Setup.  Adjancent color scheme 15 degrees apart. */
+
+:root {
+    --color-1: #4091b0;   /* Medium blue */
+    --color-2: #ff9756;   /* Medium orange */
+    --color-3: #ffbf56;   /* Golden yellow */
+    
+    --color-4: #64adc9;   /* Light blue */
+}
+
+
 /*General Styles*/
-.body-wrapper { padding-top: var(--bs-gutter-x,.75rem); padding-bottom: var(--bs-gutter-x,.75rem); }
+.body-wrapper { padding-bottom: var(--bs-gutter-x,.75rem); }
 
 input, textarea, button { padding: 5px 12px; border: 2px solid #a0a0a0; border-radius: 4px; transition: 0.4s; }
-button { background-color: #e0e0e0; }
-button:hover { background-color: #f0f0f0; transition: 0.4s; }
+button { font-weight: 600; background-color: var(--color-1); color: #ffffff; }
+button:hover { background-color: var(--color-4); transition: 0.4s; }
 
 .form-transmission-results { padding-bottom: 60px; }
 
 
 /*Header*/
-.header { padding-bottom: 40px; }
+.header { padding-top: var(--bs-gutter-x,.75rem); padding-bottom: 40px; background-color: var(--color-1); }
 .main-title-container { padding-left: 30px; }
 .main-title-container__main-title { font-weight: bold; color: #333333; }
 .subtitle-container { padding-left: 30px; }
-.subtitle-container__sub-title { font-weight: bold; color: #333333; }
+.subtitle-container__sub-title { font-weight: bold; color: #fcfcfc; }
+
+
+/*Main Content*/
+.main-content-container { padding-top: 15px; }
 
 
 /*Location Search Form*/

@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </div>
             </header>
-            <div class="container">
+            <div class="container main-content-container">
                 <div class="row">
                     <div class="col-sm-12">
                         <form id="citySearch" class="city-search" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
