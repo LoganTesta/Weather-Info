@@ -17,7 +17,7 @@
 
 a { color: var(--color-1); transition: 0.1s; }
 a:hover { color: var(--color-4); transition: 0.1s; }
-input, textarea, button { padding: 5px 12px; border: 2px solid #a0a0a0; border-radius: 4px; transition: 0.4s; }
+input, textarea, button { display: block; padding: 5px 12px; border: 3px solid #d0d0d0; border-radius: 4px; transition: 0.4s; }
 button { font-weight: 600; background-color: var(--color-1); color: #ffffff; }
 button:hover { background-color: var(--color-4); transition: 0.4s; }
 
@@ -37,8 +37,9 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 
 
 /*Location Search Form*/
-.city-search { padding-bottom: 40px; }
-.city-search__city-name-label { padding-right: 10px; margin-bottom: 5px; font-size: 20px; font-weight: 600; }
+.city-search { padding-bottom: 40px; font-size: 0; }
+.city-search input, .city-search textarea, .city-search button { font-size: 16px; }
+.city-search__city-name-label { padding-right: 15px; margin-bottom: 5px; font-size: 20px; font-weight: 600; }
 .city-search__input { margin-bottom: 10px; }
 .city-search__search-city-button { }
 
@@ -68,7 +69,11 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 
 
 @media only screen and (min-width: 768px){
+    
+    /*General Styles*/
+    input, textarea, button { display: inline-block; }
 
+    
     /*Weather section*/
     .weather-day { }
     
@@ -76,7 +81,7 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
     /*Location Search Form*/
     .city-search__city-name-label { margin-bottom: 0; }
     .city-search__input { margin-bottom: 0; }
-    .city-search__search-city-button { }
+    .city-search__search-city-button { margin-left: 6px; }
     
 }
 
