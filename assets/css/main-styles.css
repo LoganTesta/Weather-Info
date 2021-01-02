@@ -15,6 +15,8 @@
 /*General Styles*/
 .body-wrapper { padding-bottom: var(--bs-gutter-x,.75rem); }
 
+a { color: var(--color-1); transition: 0.1s; }
+a:hover { color: var(--color-4); transition: 0.1s; }
 input, textarea, button { padding: 5px 12px; border: 2px solid #a0a0a0; border-radius: 4px; transition: 0.4s; }
 button { font-weight: 600; background-color: var(--color-1); color: #ffffff; }
 button:hover { background-color: var(--color-4); transition: 0.4s; }
