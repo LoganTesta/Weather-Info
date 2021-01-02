@@ -97,7 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <a href="index.php"><img src="" alt=""></a>
                     </div>
                     <div class="main-title-container">
-                        <h1 class="main-title-container__main-title">Weather Info</h1>
+                        <h1 class="main-title-container__main-title">
+                            <a href="index.php" class="main-title-container__main-title__link">Weather Info</a>
+                        </h1>
                     </div>
                     <div class="subtitle-container">
                         <h2 class="subtitle-container__sub-title">All the Info you Need</h2>

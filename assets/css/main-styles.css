@@ -27,7 +27,9 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 /*Header*/
 .header { padding-top: var(--bs-gutter-x,.75rem); padding-bottom: 40px; background-color: var(--color-1); }
 .main-title-container { padding-left: 30px; }
-.main-title-container__main-title { font-weight: bold; color: #333333; }
+.main-title-container__main-title { }
+.main-title-container__main-title__link { font-weight: bold; color: #333333; text-decoration: none; }
+.main-title-container__main-title__link:hover { color: #333333; text-decoration: underline; }
 .subtitle-container { padding-left: 30px; }
 .subtitle-container__sub-title { font-weight: bold; color: #fcfcfc; }
 
