@@ -111,9 +111,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label class="city-search__city-name-label" for="cityName">City Name</label>
                             <input type="input" id="cityName" class="city-search__input" name="cityName" />
                             <button id="searchCityButton" class="city-search__search-city-button" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
-                            <div class="javascript-validation-results-contact-us"></div>
-                            <?php echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; ?>
                         </form>
+                        <?php if ( $ValidationResponse !== "") { echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; } ?>
                         <?php
                         $city = "";
                         $locationURL = "";
@@ -181,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     $weatherIcon = $sleetIcon;
                                 } else if ( $weatherState === "Hail" ) {
                                     $weatherIcon = $hailIcon;
-                                } else if ( $weatherState === "Thunderstorm" ) {
+                                } else if ( $weatherState === "Thunder" ) {
                                    $weatherIcon = $thunderstormIcon;
                                 } else if ( $weatherState === "Heavy Rain" ) {
                                     $weatherIcon = $heavyRainIcon;
