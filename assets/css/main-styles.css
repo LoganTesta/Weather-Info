@@ -13,25 +13,27 @@
 
 
 /*General Styles*/
-.body-wrapper { padding-bottom: var(--bs-gutter-x,.75rem); }
+.body-wrapper { }
 
 a { color: var(--color-1); transition: 0.1s; }
 a:hover { color: var(--color-4); transition: 0.1s; }
 input, textarea, button { display: block; padding: 5px 12px; border: 3px solid #d0d0d0; border-radius: 4px; transition: 0.4s; }
-button { font-weight: 600; background-color: var(--color-1); color: #ffffff; }
-button:hover { background-color: var(--color-4); transition: 0.4s; }
+button { font-weight: 600; background-color: var(--color-4); color: #000000; }
+button:hover { background-color: var(--color-1); transition: 0.4s; }
 
 .form-transmission-results { padding-bottom: 60px; }
 
 
 /*Header*/
-.header { padding-top: var(--bs-gutter-x,.75rem); padding-bottom: 40px; background-color: var(--color-1); }
+.header { padding-top: 60px; padding-bottom: 40px; background-color: var(--color-1); }
 .main-title-container { padding-left: 30px; }
 .main-title-container__main-title { }
 .main-title-container__main-title__link { font-weight: bold; color: #333333; text-decoration: none; }
 .main-title-container__main-title__link:hover { color: #333333; text-decoration: underline; }
 .subtitle-container { padding-left: 30px; }
 .subtitle-container__sub-title { font-weight: bold; color: #fcfcfc; }
+
+#logo { position: absolute; }
 
 
 /*Main Content*/
@@ -47,10 +49,10 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 
 
 /*Location Search Results*/
-.location-search__query { padding-bottom: 30px; }
-.location-search__intro { padding-bottom: 10px; }
+.location-search__query { padding-bottom: 15px; }
+.location-search__intro { padding-bottom: 40px; }
 .location-search__results { }
-.location-search__results__city { padding-bottom: 8px; font-weight: bold; }
+.location-search__results__city { padding-bottom: 15px; font-weight: bold; }
 .location-search__results__state-or-country { }
 
 
