@@ -35,7 +35,7 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 
 
 /*Main Content*/
-.main-content-container { padding-top: 15px; }
+.main-content-container { padding-top: 30px; padding-bottom: 30px; }
 
 
 /*Location Search Form*/
@@ -67,6 +67,10 @@ button:hover { background-color: var(--color-4); transition: 0.4s; }
 .weather-day__visibility { padding-bottom: 12px; }
 .weather-day__image-container { }
 .weather-day__image { display: block; margin-left: auto; margin-right: auto; }
+
+
+/*Footer*/
+.footer { padding: 60px 0 60px 0; background-color: var(--color-1); color: #f9f9f9; }
 
 
 
