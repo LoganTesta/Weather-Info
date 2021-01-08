@@ -37,9 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $ValidationResponse .= "<p>Please enter a city name.</p>";
     } else if ($PassedValidation) {
         $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
-        $jsonData = file_get_contents( "" . $SearchPath );
-        $jsonArray = json_decode( $jsonData );
         
+        $curl = curl_init(); 
+        curl_setopt_array( $curl, array(
+            CURLOPT_URL => $SearchPath,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"  
+            ),
+        ));
+        $jsonData = curl_exec( $curl );
+        $error = curl_error( $curl );
+        curl_close( $curl );
+        
+        $jsonArray = json_decode( $jsonData, false );
         
         $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
         $ValidationResponse .= "<div class='location-search__intro'>Search Results (" . count( $jsonArray ) . " total):</div>";
@@ -50,7 +64,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $longitude = $latLongArray[1];
            
             $cityURL = "https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/";
-            $jsonDataCity = file_get_contents( $cityURL );
+            
+            
+            $curl = curl_init(); 
+            curl_setopt_array( $curl, array(
+                CURLOPT_URL => $cityURL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                    "cache-control: no-cache"  
+                ),
+            ));
+            $jsonDataCity = curl_exec( $curl );
+            $error = curl_error( $curl );
+            curl_close( $curl );
+
+            
             $jsonArrayCity = json_decode( $jsonDataCity );
             $stateOrCountry = $jsonArrayCity->parent->title;             
 
@@ -155,7 +186,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                         if( $city !== "" && $locationURL !== "" && $latitude !== "" && $longitude !== "" ) {
-                            $jsonData = file_get_contents( $locationURL );
+                            $curl = curl_init(); 
+                            curl_setopt_array( $curl, array(
+                                CURLOPT_URL => $locationURL,
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_TIMEOUT => 30,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => "GET",
+                                CURLOPT_HTTPHEADER => array(
+                                    "cache-control: no-cache"  
+                                ),
+                            ));
+                            $jsonData = curl_exec( $curl );
+                            $error = curl_error( $curl );
+                            curl_close( $curl );
+
+                            
                             $jsonArray = json_decode( $jsonData );
                             echo "<div class='weather-city'>Weather info for <strong>" . $city . ", " . $locationStateCountry . "</strong>"
                                 . " at Latitude <strong>" 
