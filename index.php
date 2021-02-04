@@ -14,12 +14,13 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
 
 
 $CityName = "";
+$SetUnitType = "";
 
 $ValidationResponse = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cityName'])) {
     $CityName = htmlspecialchars(strip_tags(trim($_POST['cityName'])));
-
+    
     /* Validation time */
     $PassedValidation = true;
 
@@ -100,6 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $CityName = "";
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setUnitType'])) {
+    $SetUnitType = htmlspecialchars(strip_tags(trim($_POST['setUnitType'])));
+}
+ 
 ?>
 
 
@@ -143,7 +148,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <form id="citySearch" class="city-search" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <label class="city-search__city-name-label" for="cityName">City Name</label>
                             <input type="input" id="cityName" class="city-search__input" name="cityName" />
-                            <button id="searchCityButton" class="city-search__search-city-button" name="searchCityButton" onsubmit="return validateContactForm();" type="submit">Search</button>
+                            <button id="searchCityButton" class="city-search__search-city-button" name="searchCityButton" onsubmit="" type="submit">Search</button>
+                        </form>
+                        <form id="setUnitType" class="set-unit-type" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <select id="setUnit" class="set-unit">
+                                <option value="Imperial">Imperial</option>
+                                <option value="Metric">Metric</option>
+                            </select>
+                            <button id="setUnitButton" class="set-unit__button" name="setUnitButton" onsubmit="" type="submit">Set Unit</button>
                         </form>
                         <?php if ( $ValidationResponse !== "") { echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; } ?>
                         <?php
