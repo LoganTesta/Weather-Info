@@ -256,16 +256,16 @@ if(isset($_SESSION['setUnitType'])){
                                         date( 'd', strtotime( $consolidated_weather->applicable_date ) );
                                 $minTemp;
                                 $maxTemp;
-                                $tempUnits;
+                                $temperatureUnits;
                                 
                                 if($_SESSION["unitType"] === "Imperial") {
                                     $minTemp = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
                                     $maxTemp = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
-                                    $tempUnits = "&degF";
+                                    $temperatureUnits = "&degF";
                                 } else {
                                     $minTemp = round( ( $consolidated_weather->min_temp ) );
                                     $maxTemp = round( ( $consolidated_weather->max_temp ) );
-                                    $tempUnits = "&degC";
+                                    $temperatureUnits = "&degC";
                                 }
                                 $weatherState = $consolidated_weather->weather_state_name;
                                 $weatherIcon;
@@ -281,7 +281,17 @@ if(isset($_SESSION['setUnitType'])){
                                 }
                                 
                                 $windDirection = $consolidated_weather->wind_direction_compass;
-                                $airPressure = round( $consolidated_weather->air_pressure * 0.0295301, 2 );
+                                
+                                $airPressure;
+                                $airPressureUnits;
+                                if( $_SESSION["unitType"] === "Imperial" ) {
+                                    $airPressure = round( $consolidated_weather->air_pressure * 0.0295301, 2 );
+                                    $airPressureUnits = "in";
+                                } else {
+                                    $airPressure = round( $consolidated_weather->air_pressure, 2 );
+                                    $airPressureUnits = "mb";
+                                }
+                               
                                 $humidity = $consolidated_weather->humidity;
                                 $visibility = round( $consolidated_weather->visibility, 1 );
 
@@ -316,11 +326,11 @@ if(isset($_SESSION['setUnitType'])){
                                 } else { 
                                     $result .= "<div class='weather-day__date'>" . $date . "</div>";
                                 } 
-                                $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $tempUnits . "</div>";
-                                $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $tempUnits . "</div>";
+                                $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $temperatureUnits . "</div>";
+                                $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $temperatureUnits . "</div>";
                                 $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . $windUnits . "</div>";
-                                $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " in.</div>";
+                                $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " " . $airPressureUnits . "</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
                                 $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
                                 $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
