@@ -176,48 +176,61 @@ if(isset($_SESSION['setUnitType'])){
                         <?php echo "Unit Type: " . $_SESSION['unitType']; ?>
                         <?php if ( $ValidationResponse !== "") { echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; } ?>
                         <?php
-                        $city = "";
-                        $locationURL = "";
-                        $latitude = "";
-                        $longitude = "";
-                        $locationStateCountry = "";
-                        
-                        
-                        if( isset( $_GET['city'] ) ){
-                            $city = $_GET['city'];
+
+                        if ( isset($_SESSION["city"]) === false ) {
+                            $_SESSION["city"] = "&nsbp;";
+                        }
+                        if ( isset($_SESSION["locationURL"]) === false ) {
+                            $_SESSION["locationURL"] = "&nbsp;";
+                        }
+                        if ( isset($_SESSION["latitude"]) === false ) {
+                            $_SESSION["latitude"] = "&nbsp;";
+                        }
+                        if(  isset($_SESSION["longitude"]) === false ) {
+                            $_SESSION["longitude"] = "&nbsp;";
+                        }
+                        if ( isset($_SESSION["locationStateCountry"]) === false ) {
+                            $_SESSION["locationStateCountry"] = "&nbsp;";
                         }
                         
-                        if( isset( $_GET['stateOrCountry'] ) ){
-                            $locationStateCountry = $_GET['stateOrCountry'];
+                        
+                        
+                        
+                        if ( isset( $_GET['city'] ) ) {
+                            $_SESSION["city"] = $_GET['city'];
                         }
                         
-                        if( isset( $_GET['locationURL'] ) ){
-                            $locationURL = $_GET['locationURL'];
+                        if ( isset( $_GET['stateOrCountry'] ) ) {
+                            $_SESSION["locationStateCountry"] = $_GET['stateOrCountry'];
+                        }
+                        
+                        if ( isset( $_GET['locationURL'] ) ) {
+                            $_SESSION["locationURL"] = $_GET['locationURL'];
                         }   
                         
-                        if( isset( $_GET['latitude'] ) ){
-                            $latitude = round( $_GET['latitude'], 2 );
-                            if( $latitude < 0 ) {
-                                $latitude .= " &deg;S";
-                            } else if ( $latitude > 0 ) { 
-                                $latitude .= " &deg;N";
+                        if( isset( $_GET['latitude'] ) ) {
+                            $_SESSION["latitude"] = round( $_GET['latitude'], 2 );
+                            if( $_SESSION["latitude"] < 0 ) {
+                                $_SESSION["latitude"] .= " &deg;S";
+                            } else if ( $_SESSION["latitude"] > 0 ) { 
+                                $_SESSION["latitude"] .= " &deg;N";
                             }
                         }
                         
-                        if( isset( $_GET['longitude'] ) ){
-                            $longitude = round( $_GET['longitude'], 2 );
-                            if( $longitude < 0 ) {
-                                $longitude .= " &deg;W";
-                            } else if ( $longitude > 0 ) { 
-                                $longitude .= " &deg;E";
+                        if ( isset( $_GET['longitude'] ) ) {
+                            $_SESSION["longitude"] = round( $_GET['longitude'], 2 );
+                            if( $_SESSION["longitude"] < 0 ) {
+                                $_SESSION["longitude"] .= " &deg;W";
+                            } else if ( $_SESSION["longitude"] > 0 ) { 
+                                $_SESSION["longitude"] .= " &deg;E";
                             }
                         }
 
 
-                        if( $city !== "" && $locationURL !== "" && $latitude !== "" && $longitude !== "" ) {
+                        if ( $_SESSION["city"] !== "" && $_SESSION["locationURL"] !== "" && $_SESSION["latitude"] !== "" && $_SESSION["longitude"] !== "" ) {
                             $curl = curl_init(); 
                             curl_setopt_array( $curl, array(
-                                CURLOPT_URL => $locationURL,
+                                CURLOPT_URL => $_SESSION["locationURL"],
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_TIMEOUT => 30,
                                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -232,9 +245,9 @@ if(isset($_SESSION['setUnitType'])){
 
                             
                             $jsonArray = json_decode( $jsonData );
-                            echo "<div class='weather-city'>Weather info for <strong>" . $city . ", " . $locationStateCountry . "</strong>"
+                            echo "<div class='weather-city'>Weather info for <strong>" . $_SESSION["city"] . ", " . $_SESSION["locationStateCountry"] . "</strong>"
                                 . " at Latitude <strong>" 
-                                . $latitude . "</strong>, Longitude <strong>" . $longitude . "</strong>.</div>";
+                                . $_SESSION["latitude"] . "</strong>, Longitude <strong>" . $_SESSION["longitude"] . "</strong>.</div>";
                             $result = "<div class='weather-info row'>";
                             $i = 0;
                             foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
@@ -321,8 +334,7 @@ if(isset($_SESSION['setUnitType'])){
                 </div>
             </footer>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      </body>
 </html>
