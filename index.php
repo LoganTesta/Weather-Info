@@ -269,7 +269,17 @@ if(isset($_SESSION['setUnitType'])){
                                 }
                                 $weatherState = $consolidated_weather->weather_state_name;
                                 $weatherIcon;
-                                $windSpeed = round( $consolidated_weather->wind_speed );
+                                
+                                $windSpeed;
+                                $windUnits;
+                                if ( $_SESSION["unitType"] === "Imperial" ) {
+                                    $windSpeed = round( $consolidated_weather->wind_speed );
+                                    $windUnits = "mph";
+                                } else {
+                                    $windSpeed = round( 1.609344 * $consolidated_weather->wind_speed );
+                                    $windUnits = "kph";
+                                }
+                                
                                 $windDirection = $consolidated_weather->wind_direction_compass;
                                 $airPressure = round( $consolidated_weather->air_pressure * 0.0295301, 2 );
                                 $humidity = $consolidated_weather->humidity;
@@ -309,7 +319,7 @@ if(isset($_SESSION['setUnitType'])){
                                 $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $tempUnits . "</div>";
                                 $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $tempUnits . "</div>";
                                 $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
-                                $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
+                                $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . $windUnits . "</div>";
                                 $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " in.</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
                                 $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
