@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+session_start();
 
 $snowIcon = "https://www.metaweather.com/static/img/weather/png/sn.png";
 $sleetIcon = "https://www.metaweather.com/static/img/weather/png/sl.png";
@@ -14,62 +15,40 @@ $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
 
 
 $CityName = "";
-$SetUnitType = "";
-
 $ValidationResponse = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cityName'])) {
-    $CityName = htmlspecialchars(strip_tags(trim($_POST['cityName'])));
-    
-    /* Validation time */
-    $PassedValidation = true;
+
+if(isset($_SESSION['citySearch']) === false){
+    $_SESSION['citySearch'] = "not empty";
+    $_SESSION['cityName'] = "not empty";
+}
 
 
-    $ValidSearchCity = true;
-    if (Trim($CityName) === "") {
-        $ValidSearchCity = false;
-    }
-    if ($ValidSearchCity === false) {
-        $PassedValidation = false;
-    }
+if(isset($_SESSION['citySearch'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cityName'])) {
+        $_SESSION['cityName'] = htmlspecialchars(strip_tags(trim($_POST['cityName'])));
+
+        /* Validation time */
+        $PassedValidation = true;
 
 
-    if ($PassedValidation === false) {
-        $ValidationResponse .= "<p>Please enter a city name.</p>";
-    } else if ($PassedValidation) {
-        $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $CityName;
-        
-        $curl = curl_init(); 
-        curl_setopt_array( $curl, array(
-            CURLOPT_URL => $SearchPath,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "cache-control: no-cache"  
-            ),
-        ));
-        $jsonData = curl_exec( $curl );
-        $error = curl_error( $curl );
-        curl_close( $curl );
-        
-        $jsonArray = json_decode( $jsonData, false );
-        
-        $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $CityName . "</strong>.</div>";
-        $ValidationResponse .= "<div class='location-search__intro'>Search Results (" . count( $jsonArray ) . " total):</div>";
-        $ValidationResponse .= "<div class='location-search__results'>";
-        for( $i = 0; $i < count( $jsonArray ); $i++ ){           
-            $latLongArray = explode( ",", $jsonArray[$i]->latt_long );
-            $latitude = $latLongArray[0];
-            $longitude = $latLongArray[1];
-           
-            $cityURL = "https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/";
-            
-            
+        $ValidSearchCity = true;
+        if (Trim($_SESSION['cityName']) === "") {
+            $ValidSearchCity = false;
+        }
+        if ($ValidSearchCity === false) {
+            $PassedValidation = false;
+        }
+
+
+        if ($PassedValidation === false) {
+            $ValidationResponse .= "<p>Please enter a city name.</p>";
+        } else if ($PassedValidation) {
+            $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $_SESSION['cityName'];
+
             $curl = curl_init(); 
             curl_setopt_array( $curl, array(
-                CURLOPT_URL => $cityURL,
+                CURLOPT_URL => $SearchPath,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -78,31 +57,68 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cityName'])) {
                     "cache-control: no-cache"  
                 ),
             ));
-            $jsonDataCity = curl_exec( $curl );
+            $jsonData = curl_exec( $curl );
             $error = curl_error( $curl );
             curl_close( $curl );
 
-            
-            $jsonArrayCity = json_decode( $jsonDataCity );
-            $stateOrCountry = $jsonArrayCity->parent->title;             
+            $jsonArray = json_decode( $jsonData, false );
 
-            
-            $ValidationResponse .= "<div class='location-search__results__city'>";
-            $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&stateOrCountry=" . $stateOrCountry 
-                    . "&latitude=" . $latitude . "&longitude=" . $longitude 
-                    . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title  
-                    . "<span class='location-search__results__state-or-country'>, " . $stateOrCountry . "</span></a>";
-            
+            $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $_SESSION['cityName'] . "</strong>.</div>";
+            $ValidationResponse .= "<div class='location-search__intro'>Search Results (" . count( $jsonArray ) . " total):</div>";
+            $ValidationResponse .= "<div class='location-search__results'>";
+            for( $i = 0; $i < count( $jsonArray ); $i++ ){           
+                $latLongArray = explode( ",", $jsonArray[$i]->latt_long );
+                $latitude = $latLongArray[0];
+                $longitude = $latLongArray[1];
+
+                $cityURL = "https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/";
+
+
+                $curl = curl_init(); 
+                curl_setopt_array( $curl, array(
+                    CURLOPT_URL => $cityURL,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => array(
+                        "cache-control: no-cache"  
+                    ),
+                ));
+                $jsonDataCity = curl_exec( $curl );
+                $error = curl_error( $curl );
+                curl_close( $curl );
+
+
+                $jsonArrayCity = json_decode( $jsonDataCity );
+                $stateOrCountry = $jsonArrayCity->parent->title;             
+
+
+                $ValidationResponse .= "<div class='location-search__results__city'>";
+                $ValidationResponse .=  "<a href='index.php?city=" . $jsonArray[$i]->title . "&stateOrCountry=" . $stateOrCountry 
+                        . "&latitude=" . $latitude . "&longitude=" . $longitude 
+                        . "&locationURL=https://www.metaweather.com/api/location/" . $jsonArray[$i]->woeid . "/'>". $jsonArray[$i]->title  
+                        . "<span class='location-search__results__state-or-country'>, " . $stateOrCountry . "</span></a>";
+
+                $ValidationResponse .= "</div>";
+            }   
             $ValidationResponse .= "</div>";
-        }   
-        $ValidationResponse .= "</div>";
+        }
+    } else {
+        $_SESSION['cityName'] = "";
     }
-} else {
-    $CityName = "";
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setUnitType'])) {
-    $SetUnitType = htmlspecialchars(strip_tags(trim($_POST['setUnitType'])));
+if(isset($_SESSION['setUnitType']) === false){
+    $_SESSION['setUnitType'] = "not empty";
+    $_SESSION['unitType'] = "Imperial";
+}
+
+
+if(isset($_SESSION['setUnitType'])){
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['unitType'])) {
+        $_SESSION['unitType'] = htmlspecialchars(strip_tags(trim($_POST['unitType'])));
+    }
 }
  
 ?>
@@ -151,12 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setUnitType'])) {
                             <button id="searchCityButton" class="city-search__search-city-button" name="searchCityButton" onsubmit="" type="submit">Search</button>
                         </form>
                         <form id="setUnitType" class="set-unit-type" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                            <select id="setUnit" class="set-unit">
+                            <select id="unitType" class="set-unit" name="unitType">
+                                <option value=""></option>
                                 <option value="Imperial">Imperial</option>
                                 <option value="Metric">Metric</option>
                             </select>
                             <button id="setUnitButton" class="set-unit__button" name="setUnitButton" onsubmit="" type="submit">Set Unit</button>
                         </form>
+                        <?php echo "Unit Type: " . $_SESSION['unitType']; ?>
                         <?php if ( $ValidationResponse !== "") { echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; } ?>
                         <?php
                         $city = "";
