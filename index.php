@@ -14,7 +14,6 @@ $lightCloudIcon = "https://www.metaweather.com/static/img/weather/png/lc.png";
 $clearIcon = "https://www.metaweather.com/static/img/weather/png/c.png";
 
 
-$CityName = "";
 $ValidationResponse = "";
 
 
@@ -242,8 +241,19 @@ if(isset($_SESSION['setUnitType'])){
                                 $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
                                         date( 'M', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
                                         date( 'd', strtotime( $consolidated_weather->applicable_date ) );
-                                $minTempFahrenheit = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
-                                $maxTempFahrenheit = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
+                                $minTemp;
+                                $maxTemp;
+                                $tempUnits;
+                                
+                                if($_SESSION["unitType"] === "Imperial") {
+                                    $minTemp = round( ( $consolidated_weather->min_temp * 9 / 5 ) + 32 );
+                                    $maxTemp = round( ( $consolidated_weather->max_temp * 9 / 5 ) + 32 );
+                                    $tempUnits = "&degF";
+                                } else {
+                                    $minTemp = round( ( $consolidated_weather->min_temp ) );
+                                    $maxTemp = round( ( $consolidated_weather->max_temp ) );
+                                    $tempUnits = "&degC";
+                                }
                                 $weatherState = $consolidated_weather->weather_state_name;
                                 $weatherIcon;
                                 $windSpeed = round( $consolidated_weather->wind_speed );
@@ -283,8 +293,8 @@ if(isset($_SESSION['setUnitType'])){
                                 } else { 
                                     $result .= "<div class='weather-day__date'>" . $date . "</div>";
                                 } 
-                                $result .= "<div class='weather-day__min-temp'>Low: " . $minTempFahrenheit . " &degF</div>";
-                                $result .= "<div class='weather-day__max-temp'>High: " . $maxTempFahrenheit . " &degF</div>";
+                                $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $tempUnits . "</div>";
+                                $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $tempUnits . "</div>";
                                 $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . "mph</div>";
                                 $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " in.</div>";
