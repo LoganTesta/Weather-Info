@@ -137,7 +137,7 @@ if(isset($_SESSION['setUnitType'])){
         <link rel="icon" type="image/png" href="" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
               integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=01042021" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=02042021" />
         <link rel="stylesheet" type="text/css" href="assets/css/print-styles.css?mod=12232020" media="print" />
     </head>
     <body class="page-index">
@@ -171,9 +171,9 @@ if(isset($_SESSION['setUnitType'])){
                                 <option value="Imperial">Imperial</option>
                                 <option value="Metric">Metric</option>
                             </select>
-                            <button id="setUnitButton" class="set-unit__button" name="setUnitButton" onsubmit="" type="submit">Set Unit</button>
+                            <button id="setUnitButton" class="set-unit__button" name="setUnitButton" onsubmit="" type="submit">Set Unit Type</button>
                         </form>
-                        <?php echo "Unit Type: " . $_SESSION['unitType']; ?>
+                        <?php echo "Unit Type: " . $_SESSION['unitType'] . "."; ?>
                         <?php if ( $ValidationResponse !== "") { echo "<div class='form-transmission-results'>" . $ValidationResponse . "</div>"; } ?>
                         <?php
 
