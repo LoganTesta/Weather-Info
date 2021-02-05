@@ -303,27 +303,39 @@ if(isset($_SESSION['setUnitType'])){
                                     $visibilityUnits = "kilometers";
                                 }
                                 
+                                $readeableWeatherState;
                                 if ( $weatherState === "Snow" ) {
-                                    $weatherIcon = $snowIcon;
+                                    $readeableWeatherState = $weatherState;
+                                    $weatherIcon = $snowIcon; 
                                 } else if ( $weatherState === "Sleet" ) {
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = $sleetIcon;
                                 } else if ( $weatherState === "Hail" ) {
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = $hailIcon;
                                 } else if ( $weatherState === "Thunder" ) {
-                                   $weatherIcon = $thunderstormIcon;
+                                    $readeableWeatherState = $weatherState;
+                                    $weatherIcon = $thunderstormIcon;
                                 } else if ( $weatherState === "Heavy Rain" ) {
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = $heavyRainIcon;
                                 } else if ( $weatherState === "Light Rain" ) {
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = $lightRainIcon;
                                 } else if ( $weatherState === "Showers" ) {
-                                    $weatherIcon = $showersIcon;   
+                                    $readeableWeatherState = $weatherState;
+                                    $weatherIcon = $showersIcon;  
                                 } else if ( $weatherState === "Heavy Cloud" ) {
+                                    $readeableWeatherState = "Heavy Clouds";
                                     $weatherIcon = $heavyCloudIcon;
                                 } else if ( $weatherState === "Light Cloud" ) {
+                                    $readeableWeatherState = "Light Clouds";
                                     $weatherIcon = $lightCloudIcon;
                                 } else if ( $weatherState === "Clear" ) {
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = $clearIcon;   
                                 } else { 
+                                    $readeableWeatherState = $weatherState;
                                     $weatherIcon = "";
                                 }
 
@@ -336,7 +348,7 @@ if(isset($_SESSION['setUnitType'])){
                                 } 
                                 $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $temperatureUnits . "</div>";
                                 $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $temperatureUnits . "</div>";
-                                $result .= "<div class='weather-day__conditions'>" . $weatherState . ".</div>";
+                                $result .= "<div class='weather-day__conditions'>" . $readeableWeatherState . ".</div>";
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . $windUnits . "</div>";
                                 $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " " . $airPressureUnits . "</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
