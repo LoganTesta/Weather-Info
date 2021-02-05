@@ -284,8 +284,8 @@ if(isset($_SESSION['setUnitType'])){
                                 
                                 $airPressure;
                                 $airPressureUnits;
-                                if( $_SESSION["unitType"] === "Imperial" ) {
-                                    $airPressure = round( $consolidated_weather->air_pressure * 0.0295301, 2 );
+                                if ( $_SESSION["unitType"] === "Imperial" ) {
+                                    $airPressure = round( 0.0295301 * $consolidated_weather->air_pressure, 2 );
                                     $airPressureUnits = "in";
                                 } else {
                                     $airPressure = round( $consolidated_weather->air_pressure, 2 );
@@ -293,8 +293,16 @@ if(isset($_SESSION['setUnitType'])){
                                 }
                                
                                 $humidity = $consolidated_weather->humidity;
-                                $visibility = round( $consolidated_weather->visibility, 1 );
-
+                                
+                                $visibilityUnits;
+                                if ( $_SESSION["unitType"] === "Imperial" ) {
+                                    $visibility = round( $consolidated_weather->visibility, 1 );
+                                    $visibilityUnits = "miles";
+                                } else {
+                                    $visibility = round( 1.609344 * $consolidated_weather->visibility, 1 );
+                                    $visibilityUnits = "kilometers";
+                                }
+                                
                                 if ( $weatherState === "Snow" ) {
                                     $weatherIcon = $snowIcon;
                                 } else if ( $weatherState === "Sleet" ) {
@@ -332,7 +340,7 @@ if(isset($_SESSION['setUnitType'])){
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . $windUnits . "</div>";
                                 $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " " . $airPressureUnits . "</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
-                                $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " miles</div>";
+                                $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " " . $visibilityUnits . "</div>";
                                 $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                 $result .= "</div>";
                                 $result .= "</div>";
