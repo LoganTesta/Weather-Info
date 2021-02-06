@@ -62,7 +62,8 @@ button:hover { background-color: var(--color-1); transition: 0.4s; }
 
 
 /*Weather section*/
-.weather-city { padding-bottom: 30px; }
+.weather-city { }
+.time-details { padding-bottom: 30px; }
 .weather-day { padding: 15px 10px; margin-bottom: 60px; border: 3px solid #d0d0d0; border-radius: 5px; background-color: #f4f4f4; }
 .weather-info .weather-day__date { padding-bottom: 12px; padding-left: 12px; font-size: 18px; font-weight: bold; }
 .weather-day__min-temp { display: inline-block; }

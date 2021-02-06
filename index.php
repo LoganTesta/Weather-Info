@@ -243,10 +243,27 @@ if(isset($_SESSION['setUnitType'])){
 
                             
                             $jsonArray = json_decode( $jsonData );
+                            
+                            
+                            if ( isset($_SESSION["sunrise"]) === false ) {
+                               $_SESSION["sunrise"] = "";
+                            }
+                            if ( isset($_SESSION["sunset"]) === false ) {
+                                $_SESSION["sunset"] = "";
+                            }
+                            $_SESSION["timezone"] = $jsonArray->timezone;
+                            date_default_timezone_set("" . $jsonArray->timezone);
+                            $_SESSION["sunrise"] = date("g:i a", strtotime( $jsonArray->sun_rise ) );
+                            $_SESSION["sunset"] = date("g:i a", strtotime( $jsonArray->sun_set ) );
+                            
+                            
                             $result = "<div class='weather-city'>Weather info for <strong>" . $_SESSION["city"] . ", " . $_SESSION["locationStateCountry"] . "</strong>"
                                 . " at Latitude <strong>" 
-                                . $_SESSION["latitude"] . "</strong>, Longitude <strong>" . $_SESSION["longitude"] . "</strong>.</div>";
+                                . $_SESSION["latitude"] . "</strong>, Longitude <strong>" . $_SESSION["longitude"] . "</strong>.</div>"
+                                . "<div class='time-details'>Sunrise: <strong>" . $_SESSION["sunrise"] 
+                                . "</strong> Sunset: <strong>" . $_SESSION["sunset"] . "</strong> (" . $_SESSION["timezone"] . ").</div>";
                             $result .= "<div class='weather-info row'>";
+                            
                             $i = 0;
                             foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
                                 $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
