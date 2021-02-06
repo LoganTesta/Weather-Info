@@ -167,7 +167,6 @@ if(isset($_SESSION['setUnitType'])){
                         </form>
                         <form id="setUnitType" class="set-unit-type" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <select id="unitType" class="set-unit" name="unitType">
-                                <option value=""></option>
                                 <option value="Imperial">Imperial</option>
                                 <option value="Metric">Metric</option>
                             </select>
@@ -178,21 +177,20 @@ if(isset($_SESSION['setUnitType'])){
                         <?php
 
                         if ( isset($_SESSION["city"]) === false ) {
-                            $_SESSION["city"] = "&nsbp;";
+                            $_SESSION["city"] = "";
                         }
                         if ( isset($_SESSION["locationURL"]) === false ) {
-                            $_SESSION["locationURL"] = "&nbsp;";
+                            $_SESSION["locationURL"] = "";
                         }
                         if ( isset($_SESSION["latitude"]) === false ) {
-                            $_SESSION["latitude"] = "&nbsp;";
+                            $_SESSION["latitude"] = "";
                         }
                         if(  isset($_SESSION["longitude"]) === false ) {
-                            $_SESSION["longitude"] = "&nbsp;";
+                            $_SESSION["longitude"] = "";
                         }
                         if ( isset($_SESSION["locationStateCountry"]) === false ) {
-                            $_SESSION["locationStateCountry"] = "&nbsp;";
+                            $_SESSION["locationStateCountry"] = "";
                         }
-                        
                         
                         
                         
@@ -245,10 +243,10 @@ if(isset($_SESSION['setUnitType'])){
 
                             
                             $jsonArray = json_decode( $jsonData );
-                            echo "<div class='weather-city'>Weather info for <strong>" . $_SESSION["city"] . ", " . $_SESSION["locationStateCountry"] . "</strong>"
+                            $result = "<div class='weather-city'>Weather info for <strong>" . $_SESSION["city"] . ", " . $_SESSION["locationStateCountry"] . "</strong>"
                                 . " at Latitude <strong>" 
                                 . $_SESSION["latitude"] . "</strong>, Longitude <strong>" . $_SESSION["longitude"] . "</strong>.</div>";
-                            $result = "<div class='weather-info row'>";
+                            $result .= "<div class='weather-info row'>";
                             $i = 0;
                             foreach ( $jsonArray->consolidated_weather as $item=>$consolidated_weather ) {
                                 $date = date( 'D', strtotime( $consolidated_weather->applicable_date ) ) . " " . 
