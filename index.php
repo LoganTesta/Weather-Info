@@ -4,7 +4,7 @@ session_start();
 
 $snowIcon = "https://www.metaweather.com/static/img/weather/png/sn.png";
 $sleetIcon = "https://www.metaweather.com/static/img/weather/png/sl.png";
-$hailIcon = "https://www.metaweather.com/static/img/weather/png/sn.png";
+$hailIcon = "https://www.metaweather.com/static/img/weather/png/h.png";
 $thunderstormIcon = "https://www.metaweather.com/static/img/weather/png/t.png";
 $heavyRainIcon = "https://www.metaweather.com/static/img/weather/png/hr.png";
 $lightRainIcon = "https://www.metaweather.com/static/img/weather/png/lr.png";
@@ -137,7 +137,7 @@ if(isset($_SESSION['setUnitType'])){
         <link rel="icon" type="image/png" href="" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
               integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=02042021" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main-styles.css?mod=02092021" />
         <link rel="stylesheet" type="text/css" href="assets/css/print-styles.css?mod=12232020" media="print" />
     </head>
     <body class="page-index">
@@ -364,11 +364,11 @@ if(isset($_SESSION['setUnitType'])){
                                 $result .= "<div class='weather-day__min-temp'>Low: " . $minTemp . " " . $temperatureUnits . "</div>";
                                 $result .= "<div class='weather-day__max-temp'>High: " . $maxTemp . " " . $temperatureUnits . "</div>";
                                 $result .= "<div class='weather-day__conditions'>" . $readeableWeatherState . ".</div>";
+                                $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
                                 $result .= "<div class='weather-day__wind'>Wind: " . $windDirection . " " . $windSpeed . $windUnits . "</div>";
                                 $result .= "<div class='weather-day__air-pressure'>Air Pressure: " . $airPressure . " " . $airPressureUnits . "</div>";
                                 $result .= "<div class='weather-day__humidity'>Humidity: " . $humidity . "%</div>";
-                                $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " " . $visibilityUnits . "</div>";
-                                $result .= "<div class='weather-day__image-container'><img class='weather-day__image' src='" . $weatherIcon . "' width='100px' height='100px' /></div>";
+                                $result .= "<div class='weather-day__visibility'>Visibility: " . $visibility . " " . $visibilityUnits . "</div>";                               
                                 $result .= "</div>";
                                 $result .= "</div>";
                                 $i++;
