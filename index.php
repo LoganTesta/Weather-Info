@@ -210,7 +210,7 @@ if(isset($_SESSION['setUnitType'])){
                         if( isset( $_GET['latitude'] ) ) {
                             $_SESSION["latitude"] = round( $_GET['latitude'], 2 );
                             if( $_SESSION["latitude"] < 0 ) {
-                                $_SESSION["latitude"] .= " &deg;S";
+                                $_SESSION["latitude"] = abs( $_SESSION["latitude"] ) . " &deg;S";
                             } else if ( $_SESSION["latitude"] > 0 ) { 
                                 $_SESSION["latitude"] .= " &deg;N";
                             }
@@ -219,7 +219,7 @@ if(isset($_SESSION['setUnitType'])){
                         if ( isset( $_GET['longitude'] ) ) {
                             $_SESSION["longitude"] = round( $_GET['longitude'], 2 );
                             if( $_SESSION["longitude"] < 0 ) {
-                                $_SESSION["longitude"] .= " &deg;W";
+                                $_SESSION["longitude"] = abs( $_SESSION["longitude"] ) . " &deg;W";
                             } else if ( $_SESSION["longitude"] > 0 ) { 
                                 $_SESSION["longitude"] .= " &deg;E";
                             }
