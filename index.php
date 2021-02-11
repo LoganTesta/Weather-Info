@@ -44,6 +44,7 @@ if(isset($_SESSION['citySearch'])) {
             $ValidationResponse .= "<p>Please enter a city name.</p>";
         } else if ($PassedValidation) {
             $SearchPath = "https://www.metaweather.com/api/location/search/?query=" . $_SESSION['cityName'];
+            $SearchPath = str_replace(" ", "%20", $SearchPath);
 
             $curl = curl_init(); 
             curl_setopt_array( $curl, array(
@@ -61,7 +62,7 @@ if(isset($_SESSION['citySearch'])) {
             curl_close( $curl );
 
             $jsonArray = json_decode( $jsonData, false );
-
+            
             $ValidationResponse .= "<div class='location-search__query'>You searched for: <strong>" . $_SESSION['cityName'] . "</strong>.</div>";
             $ValidationResponse .= "<div class='location-search__intro'>Search Results (" . count( $jsonArray ) . " total):</div>";
             $ValidationResponse .= "<div class='location-search__results'>";
